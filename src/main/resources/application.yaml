@@ -1,0 +1,16 @@
+spring:
+  debug: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rrhh
+    username: rrhh
+    password: admin
+  #    data: classpath*:oldschema.sql
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    property-naming-strategy: SNAKE_CASE

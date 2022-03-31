@@ -1,9 +1,9 @@
 package com.mcdonalds.ecommerce.repository;
 
-import com.mcdonalds.ecommerce.model.Product;
+import com.mcdonalds.ecommerce.model.ShoppingCart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product,Long> {
+public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
 }

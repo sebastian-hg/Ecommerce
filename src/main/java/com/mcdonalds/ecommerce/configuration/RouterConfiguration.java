@@ -17,7 +17,7 @@ public class RouterConfiguration {
                                                        DeleteShoppingCartHandler deleteShoppingCartHandler,
                                                        AddProductToShoppingCartHandler addProductToShoppingCartHandler,
                                                        DeleteProductFromShoppingCartHandler deleteProductFromShoppingCartHandler,
-                                                       GetStatusFromShoppingCartHandler getItemsFromShoppingCartHandler,
+                                                       GetNumberProductsHandler getItemsFromShoppingCartHandler,
                                                        CheckOutShoppingCartHandler checkoutShoppingCartHandler)
     {
         return route(RequestPredicates.GET("mcdonals/clients/{id}/purchases"), getPurchaseByPersonHandler::execute)

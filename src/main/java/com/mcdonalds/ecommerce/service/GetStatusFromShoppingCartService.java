@@ -4,5 +4,5 @@ import com.mcdonalds.ecommerce.model.ShoppingCart;
 import reactor.core.publisher.Mono;
 
 public interface GetStatusFromShoppingCartService {
-    Mono<ShoppingCart> execute();
+    Mono<ShoppingCart> execute(Long id);
 }

@@ -17,7 +17,7 @@ public class GetPurchaseByPersonHandler {
     private final ResponseHelper responseHelper;
 
     public @NonNull Mono<ServerResponse> execute(ServerRequest serverRequest) {
-        var fron = serverRequest.queryParam("from");
+        var from = serverRequest.queryParam("from");
         log.info("Body validation with request {} ...", serverRequest);
         return responseHelper.buildOK();
     }

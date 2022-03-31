@@ -2,8 +2,8 @@ package com.mcdonalds.ecommerce.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,9 +13,13 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
+@Table(name = "product")
 public class Product {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Builder.Default
+    private Long id = 0L;
     private String description;
-    private Size size;
+    private BigDecimal price;
+    private Boolean isActive;
 }

@@ -2,7 +2,7 @@ package com.mcdonalds.ecommerce.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,9 +12,12 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @Entity
+@Table(name = "discount")
 public class Discount {
-    private Long id;
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Builder.Default
+    private Long id = 0L;
     private String description;
     private Integer totalDiscount;
 
