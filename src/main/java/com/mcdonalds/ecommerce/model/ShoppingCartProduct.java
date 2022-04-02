@@ -18,8 +18,8 @@ public class ShoppingCartProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Builder.Default
     private Long id = 0L;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
     private Integer numberOfProducts;
     @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)

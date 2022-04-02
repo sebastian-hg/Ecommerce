@@ -7,12 +7,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ShoppingCartNoExistException extends Exception {
+    private static final String MESSAGE = "shopping cart not exist";
 
-    public ShoppingCartNoExistException(String message) {
-        super(message);
-    }
 
     public ShoppingCartNoExistException() {
-
+        super(MESSAGE);
     }
 }

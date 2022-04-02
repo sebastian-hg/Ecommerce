@@ -21,13 +21,11 @@ public class GetNumberProductsHandler {
 
     public @NonNull Mono<ServerResponse> execute(ServerRequest serverRequest) {
         log.info("Body validation with request {} ...", serverRequest);
-        var personId = (serverRequest.queryParam("id").get());
-        var id = Long.parseLong(personId);
+        var personId = (serverRequest.pathVariable("id"));
+        var statusId = Long.parseLong(personId);
 
-        return service.execute(id)
-                .flatMap(shoppingCart ->
-                {
-                    return responseHelper.buildOK(Mono.just(getNumberProductsMapper.toResponseDto(shoppingCart)));
-                });
+        return service.execute(statusId)
+                .map(getNumberProductsMapper::toResponseDto)
+                .flatMap(getNumberProductsResponse -> responseHelper.buildOK(Mono.just(getNumberProductsResponse)));
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import javax.transaction.Transactional;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -25,7 +26,6 @@ public class DeleteShoppingCartHandler {
         log.info("Body validation with request {} ...", serverRequest);
         var requestId = serverRequest.pathVariable("id");
         var deleteId = Long.parseLong(requestId);
-
         return service.execute(deleteId)
                 .flatMap(aBoolean -> responseHelper.buildOK());
     }

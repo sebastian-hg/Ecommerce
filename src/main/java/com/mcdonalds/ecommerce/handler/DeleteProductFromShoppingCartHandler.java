@@ -1,7 +1,6 @@
 package com.mcdonalds.ecommerce.handler;
 
 import com.mcdonalds.ecommerce.helper.ResponseHelper;
-import com.mcdonalds.ecommerce.model.dto.request.DeleteProductRequest;
 import com.mcdonalds.ecommerce.service.DeleteProductFromShoppingCartService;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
@@ -21,12 +20,12 @@ public class DeleteProductFromShoppingCartHandler {
 
     public @NonNull Mono<ServerResponse> execute(ServerRequest serverRequest) {
         log.info("Body validation with request {} ...", serverRequest);
-        var shoppingCartRequestId = serverRequest.pathVariable("id");
+        var shoppingCartRequestId = serverRequest.pathVariable("shoppingCartId");
         var shoppingCartId = Long.parseLong(shoppingCartRequestId);
         var productRequestId = serverRequest.pathVariable("productId");
         var productId = Long.parseLong(productRequestId);
-
         return service.execute(shoppingCartId, productId)
-                .flatMap(aBoolean -> responseHelper.buildOK());
+                //TODO: add DTO and MAPPER
+                .flatMap(shoppingCart -> responseHelper.buildOK(Mono.just(shoppingCart)));
     }
 }

@@ -1,12 +1,12 @@
 package com.mcdonalds.ecommerce.model;
 
+import com.mcdonalds.ecommerce.helper.IResponseSuccess;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "shopping_cart")
-public class ShoppingCart {
+public class ShoppingCart implements IResponseSuccess {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Builder.Default
@@ -25,15 +25,13 @@ public class ShoppingCart {
     @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Discount> discounts;
     @Builder.Default
     private LocalDate creationDate = LocalDate.now();
     @Builder.Default
     private LocalTime creationTime = LocalTime.now();
     private Boolean isVip;
     @Builder.Default
-    private Integer numbersProduct = 0;
+    private Integer numberProducts = 0;
     @Builder.Default
     private BigDecimal totalPurchase = BigDecimal.ZERO;
 }

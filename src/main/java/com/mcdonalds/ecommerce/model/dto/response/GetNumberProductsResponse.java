@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class GetNumberProductsResponse implements IResponseSuccess {
-    private int numbersProducts;
+    private int numberProducts;
 }

@@ -18,8 +18,8 @@ public class GetStatusFromShoppingCartServiceImpl implements GetStatusFromShoppi
     private final ShoppingCartRepository shoppingCartRepository;
 
     @Override
-    public Mono<ShoppingCart> execute(Long id) {
-        var shoppingCartResult= shoppingCartRepository.findById(id);
+    public Mono<ShoppingCart> execute(Long shoppingCartId) {
+        var shoppingCartResult= shoppingCartRepository.findById(shoppingCartId);
         return Mono.just(shoppingCartResult)
                 .filter(Optional::isPresent)
                 .map(Optional::get)

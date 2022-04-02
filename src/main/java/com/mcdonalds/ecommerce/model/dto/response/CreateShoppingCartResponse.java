@@ -5,8 +5,7 @@ import lombok.Data;
 
 @Data
 public class CreateShoppingCartResponse implements IResponseSuccess {
-    private String nameCompleted;
-    private String nationalId;
+    private String client;
     private Boolean isVip;
 
 }

@@ -1,8 +1,6 @@
 package com.mcdonalds.ecommerce.service.impl;
 
-import com.mcdonalds.ecommerce.exception.ShoppingCartNoExistException;
 import com.mcdonalds.ecommerce.model.ShoppingCart;
-import com.mcdonalds.ecommerce.repository.ProductRepository;
 import com.mcdonalds.ecommerce.repository.ShoppingCartProductRepository;
 import com.mcdonalds.ecommerce.repository.ShoppingCartRepository;
 import com.mcdonalds.ecommerce.service.DeleteProductFromShoppingCartService;
@@ -20,34 +18,31 @@ import java.util.Optional;
 public class DeleteProductFromShoppingCartServiceImpl implements DeleteProductFromShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
     private final ShoppingCartProductRepository shoppingCartProductRepository;
-    private final ProductRepository productRepository;
 
     @Override
-    public Mono<Boolean> execute(Long id, Long productId) {
+    public Mono<ShoppingCart> execute(Long shoppingCartId, Long productId) {
 
-        return Mono.just(shoppingCartRepository.existsById(id))
+        return Mono.just(shoppingCartRepository.existsById(shoppingCartId))
                 .filter(Boolean.TRUE::equals)
-                .map(aBoolean -> shoppingCartProductRepository.findByShoppingCartIdAndProductId(id, productId))
+                .map(aBoolean -> shoppingCartProductRepository.findByShoppingCartIdAndProductId(shoppingCartId, productId))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(shoppingCartProduct -> {
+                    var shoppingCart = shoppingCartRepository.findById(shoppingCartId).orElseThrow();
                     var items = shoppingCartProduct.getNumberOfProducts();
-                    var shoppingCart = shoppingCartRepository.findById(id).orElseThrow();
-                    var numberProduct = shoppingCart.getNumbersProduct() - items;
-                    shoppingCart.setNumbersProduct(numberProduct);
-                    var product = productRepository.findById(productId).orElseThrow();
-                    var priceProduct = product.getPrice();
-                    BigDecimal itemsBigDecimal = BigDecimal.valueOf(items);
-                    var totalPurchase = itemsBigDecimal.multiply(priceProduct);
-                    shoppingCart.setTotalPurchase(totalPurchase);
+                    var numberProduct = shoppingCart.getNumberProducts() - items;
+                    shoppingCart.setNumberProducts(numberProduct);
+                    var priceProduct = shoppingCartProduct.getProduct().getPrice();
+                    var totalAmount = BigDecimal.valueOf(items).setScale(2).multiply(priceProduct.setScale(2));
+                    var shoppingCartTotalAmount= shoppingCart.getTotalPurchase();
+                    shoppingCart.setTotalPurchase(shoppingCartTotalAmount.subtract(totalAmount));
                     return shoppingCart;
                 })
                 .map(shoppingCartRepository::save)
-                .flatMap(shoppingCart -> {
-                    shoppingCartProductRepository.deleteByShoppingCartIdAndProductId(id, productId);
-                    return null;
-                })
-                .map(shoppingCart -> Boolean.TRUE);
+                .map(shoppingCart -> {
+                    shoppingCartProductRepository.deleteByShoppingCartIdAndProductId(shoppingCart.getId(),productId);
+                    return shoppingCart;
+                });
     }
 
 }
