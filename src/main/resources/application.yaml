@@ -1,0 +1,18 @@
+spring:
+  debug: true
+  datasource:
+    url: jdbc:h2:mem:marvel
+    driverClassname: org.h2.Driver
+    user: sa
+    password: password
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: false
+    property-naming-strategy: SNAKE_CASE
+server:
+  port: 8099
+

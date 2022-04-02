@@ -1,6 +1,8 @@
 package com.mcdonalds.ecommerce.handler;
 
 import com.mcdonalds.ecommerce.helper.ResponseHelper;
+import com.mcdonalds.ecommerce.mapper.ShoppingCartMapper;
+import com.mcdonalds.ecommerce.service.GetShoppingCartService;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
@@ -15,10 +17,20 @@ import reactor.core.publisher.Mono;
 public class GetPurchaseByPersonHandler {
 
     private final ResponseHelper responseHelper;
+    private final GetShoppingCartService service;
+    private final ShoppingCartMapper mapper;
+
 
     public @NonNull Mono<ServerResponse> execute(ServerRequest serverRequest) {
-        var fron = serverRequest.queryParam("from");
         log.info("Body validation with request {} ...", serverRequest);
-        return responseHelper.buildOK();
+        var requestId = (serverRequest.pathVariable("id"));
+        var shoppingCartId = Long.parseLong(requestId);
+
+        return service.execute(shoppingCartId)
+                .flatMap(mapper::execute)
+                .flatMap(response -> {
+                    return responseHelper.buildOK(Mono.just(response));
+                });
     }
+
 }

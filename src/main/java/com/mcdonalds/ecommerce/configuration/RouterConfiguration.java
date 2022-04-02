@@ -17,7 +17,7 @@ public class RouterConfiguration {
                                                        DeleteShoppingCartHandler deleteShoppingCartHandler,
                                                        AddProductToShoppingCartHandler addProductToShoppingCartHandler,
                                                        DeleteProductFromShoppingCartHandler deleteProductFromShoppingCartHandler,
-                                                       GetStatusFromShoppingCartHandler getItemsFromShoppingCartHandler,
+                                                       GetNumberProductsHandler getItemsFromShoppingCartHandler,
                                                        CheckOutShoppingCartHandler checkoutShoppingCartHandler)
     {
         return route(RequestPredicates.GET("mcdonals/clients/{id}/purchases"), getPurchaseByPersonHandler::execute)
@@ -27,9 +27,9 @@ public class RouterConfiguration {
                         deleteShoppingCartHandler::execute))
                 .and(route(RequestPredicates.POST("mcdonalds/shopping-cart/{id}/product"),
                         addProductToShoppingCartHandler::execute))
-                .and(route(RequestPredicates.DELETE("mcdonals/shopping-cart/{id}/product/{productId}"),
+                .and(route(RequestPredicates.DELETE("mcdonalds/shopping-cart/{shoppingCartId}/product/{productId}"),
                         deleteProductFromShoppingCartHandler::execute))
-                .and(route(RequestPredicates.GET("mcdonalds/shopping-cart/{id}/status"),
+                .and(route(RequestPredicates.GET("mcdonalds/shopping-cart/{id}/items"),
                         getItemsFromShoppingCartHandler::execute))
                 .and(route(RequestPredicates.PUT("mcdonals/shopping-cart/{id}/checkout"),
                         checkoutShoppingCartHandler::execute));
