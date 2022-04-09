@@ -3,6 +3,7 @@ package com.mcdonalds.ecommerce.handler;
 import com.mcdonalds.ecommerce.helper.ResponseHelper;
 import com.mcdonalds.ecommerce.mapper.ShoppingCartMapper;
 import com.mcdonalds.ecommerce.repository.ShoppingCartRepository;
+import com.mcdonalds.ecommerce.service.CheckOutShoppingCartService;
 import com.mcdonalds.ecommerce.service.ValidationFourProductAndApply4X3DiscountService;
 import com.mcdonalds.ecommerce.service.ValidationShoppingCartVipAndApplyDiscountService;
 import lombok.AllArgsConstructor;
@@ -21,26 +22,27 @@ import reactor.core.publisher.Mono;
 public class CheckOutShoppingCartHandler {
 
     private final ResponseHelper responseHelper;
-    private final ShoppingCartRepository shoppingCartRepository;
-    private final ValidationShoppingCartVipAndApplyDiscountService validationShoppingCartVipAndApplyDiscountService;
-    private final ValidationFourProductAndApply4X3DiscountService validationFourProductAndApply4X3DiscountService;
+    private final CheckOutShoppingCartService service;
     private final ShoppingCartMapper mapper;
 
     public @NonNull Mono<ServerResponse> execute(ServerRequest serverRequest) {
         log.info("Body validation with request {} ...", serverRequest);
         var idRequest = serverRequest.pathVariable("id");
         var idShoppingCart = Long.parseLong(idRequest);
-        return Mono.just(idShoppingCart)
-                .flatMap(validationShoppingCartVipAndApplyDiscountService::execute)
-                .flatMap(shoppingCart ->
-                        validationFourProductAndApply4X3DiscountService.execute(shoppingCart.getId())
-                )
-                .map(shoppingCartRepository::save)
+        return service.execute(idShoppingCart)
                 .flatMap(mapper::execute)
                 .flatMap(response -> {
                     return responseHelper.buildOK(Mono.just(response));
                 });
     }
+
+
+//    Mono.just(idShoppingCart)
+//            .flatMap(validationShoppingCartVipAndApplyDiscountService::execute)
+//                .flatMap(shoppingCart ->
+//            validationFourProductAndApply4X3DiscountService.execute(shoppingCart.getId())
+//            )
+//            .map(shoppingCartRepository::save)
 
 }
 
