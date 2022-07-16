@@ -16,5 +16,5 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     property-naming-strategy: SNAKE_CASE
 server:
-  port: 8099
+  port: 8100
 
