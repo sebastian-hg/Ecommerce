@@ -1,8 +1,10 @@
 package com.mcdonalds.ecommerce.configuration;
 
+import antlr.collections.impl.BitSet;
 import com.mcdonalds.ecommerce.handler.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.server.RequestPredicate;
 import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -22,7 +24,7 @@ public class RouterConfiguration {
                                                        GetShoppingCartByFilterHandler getShoppingCartByFilterHandler) {
         return route(RequestPredicates.GET("mcdonals/clients/{id}/purchases"), getPurchaseByPersonHandler::execute)
                 .and(route(RequestPredicates.POST("mcdonalds/shopping-cart"),
-                        createShoppingCartHandler::execute))
+                        createShoppingCartHandler::executeWithBodyValidation))
                 .and(route(RequestPredicates.DELETE("mcdonalds/shopping-cart/{id}"),
                         deleteShoppingCartHandler::execute))
                 .and(route(RequestPredicates.POST("mcdonalds/shopping-cart/{id}/product"),

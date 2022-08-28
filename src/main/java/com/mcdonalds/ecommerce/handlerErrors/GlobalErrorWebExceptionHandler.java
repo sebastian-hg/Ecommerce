@@ -1,10 +1,11 @@
-package com.mcdonalds.ecommerce.handlerErrors;
+package com.mcdonalds.ecommerce.Errors;
 
 import com.mcdonalds.ecommerce.exception.BaseException;
 import com.mcdonalds.ecommerce.exception.GatewayCustomException;
 import com.mcdonalds.ecommerce.exception.GenericCustomException;
 import com.mcdonalds.ecommerce.exception.WebClientCustomException;
 import com.mcdonalds.ecommerce.exception.api.NotFoundException;
+import com.mcdonalds.ecommerce.handlerErrors.GlobalErrorAttribute;
 import io.netty.handler.timeout.ReadTimeoutException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.web.WebProperties;
