@@ -10,5 +10,8 @@ import java.util.Optional;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
     @Transactional
-    Optional<Client> findByDocumentNational(Integer DocumentNational);
+    Optional<Client> findByDocumentNational(Integer documentNational);
+    @Transactional
+    Boolean existByDocumentNational(Integer documentNational);
+
 }

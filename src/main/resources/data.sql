@@ -1,13 +1,13 @@
 INSERT INTO client
-(id, document_national, name_completed)
+(id, document_national, name_completed,gender)
 VALUES
-(1,95764679,'Sebastian Hernandez'),
-(2,16726374,'Mario Perez'),
-(3,20736376,'Jose Soto'),
-(4,10000000,'Maria Ponce'),
-(5,20000000,'Claudia Lopez'),
-(6,30000000,'Carla Dominguez'),
-(7,40000000,'Santiago Villa');
+(1,95764679,'Sebastian Hernandez','MALE'),
+(2,16726374,'Mario Perez','MALE'),
+(3,20736376,'Jose Soto','MALE'),
+(4,10000000,'Maria Ponce','FEMALE'),
+(5,20000000,'Claudia Lopez','FEMALE'),
+(6,30000000,'Carla Dominguez','FEMALE'),
+(7,40000000,'Santiago Villa','MALE');
 
 
 INSERT INTO product
