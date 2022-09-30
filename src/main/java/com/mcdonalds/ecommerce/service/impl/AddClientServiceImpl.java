@@ -27,6 +27,7 @@ public class AddClientServiceImpl implements AddClientService {
                 .filter(Boolean.TRUE::equals)
                 .switchIfEmpty(Mono.error(ClientExistException::new))
                 .map(Tuple2::getT1)
+                .map(mapper::toClient)
                 .map(repository::save);
 
        /* return Mono.just(repository.existsByDocumentNational(addClientRequest.getDocumentID()))
