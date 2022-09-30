@@ -9,8 +9,7 @@ import com.mcdonalds.ecommerce.service.AddClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
+import reactor.util.function.Tuple2;
 
 @Service
 @AllArgsConstructor
@@ -22,20 +21,20 @@ public class AddClientServiceImpl implements AddClientService {
 
     @Override
     public Mono<Client> execute(AddClientRequest addClientRequest) {
-        /*return Mono.just(addClientRequest)
-                .zipWith(Mono.just(repository.existByDocumentNational(addClientRequest.getDocumentID())))
+        return  Mono.just(addClientRequest)
+                .zipWith(Mono.just(repository.existsByDocumentNational(addClientRequest.getDocumentID())))
                 .map(Tuple2::getT2)
                 .filter(Boolean.TRUE::equals)
                 .switchIfEmpty(Mono.error(ClientExistException::new))
-                .map(Tuple2::getT1) // al llegar aqui el tuple no devuelve el valor del t1 asignado, si no que devuelve objets
-                .map(repository::save);*/
+                .map(Tuple2::getT1)
+                .map(repository::save);
 
-        return Mono.just(repository.existByDocumentNational(addClientRequest.getDocumentID()))
+       /* return Mono.just(repository.existsByDocumentNational(addClientRequest.getDocumentID()))
                 .filter(Boolean.TRUE::equals)
                 .switchIfEmpty(Mono.error(ClientExistException::new))
                 .map(aBoolean -> {
                     var client = mapper.toClient(addClientRequest);
                     return repository.save(client);
-                });
+                });*/
     }
 }

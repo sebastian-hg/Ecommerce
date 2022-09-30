@@ -12,6 +12,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     @Transactional
     Optional<Client> findByDocumentNational(Integer documentNational);
     @Transactional
-    Boolean existByDocumentNational(Integer documentNational);
+    Boolean existsByDocumentNational(Integer documentNational);
 
 }

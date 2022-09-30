@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ClientExistException extends Exception{
 
-    private static final String MESSAGE = "Client not exist";
+    private static final String MESSAGE = "Client exists";
 
 
     public ClientExistException() {
