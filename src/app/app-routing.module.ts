@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DetailProductComponent } from './detail-product/detail-product.component';
 import { ErrorComponent } from './error/error.component';
 import { InformationCompanyComponent } from './information-company/information-company.component';
 import { InitComponent } from './init/init.component';
@@ -11,6 +12,7 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   {path:'', component:InitComponent},
   {path:'productos', component:ProductComponent},
+  {path:'productosDetalle/:nombre/:precio', component:DetailProductComponent}, //para pasar datos por url 
   {path:'nosotros', component:InformationCompanyComponent},
   {path:'usuarios', component:UserComponent, children:[
       {path:'agregar', component:AgregarUsuarioComponent},

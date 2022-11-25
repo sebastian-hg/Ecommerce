@@ -27,7 +27,7 @@ import { DetailProductComponent } from './detail-product/detail-product.componen
     InformationCompanyComponent,
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
-    DetailProductComponent
+    DetailProductComponent,
   ],
   imports: [
     BrowserModule,
