@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <img [src]="logo" class="img-navbar">
   <a class="navbar-brand" href="#">Empanadas Naiguata</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -7,7 +8,8 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <div class="navbar-nav">
       <li>
-        <a class="nav-link nav-item active" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions] = "{exact: true}">home</a>
+        <a class="nav-link nav-item active" routerLink="/" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">home</a>
       </li>
       <li>
         <a class="nav-link nav-item" routerLink="/usuarios" routerLinkActive="active">Usuarios</a>

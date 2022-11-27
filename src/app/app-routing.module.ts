@@ -12,7 +12,7 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   {path:'', component:InitComponent},
   {path:'productos', component:ProductComponent},
-  {path:'productosDetalle/:nombre/:precio', component:DetailProductComponent}, //para pasar datos por url 
+  {path:'productosDetalle', component:DetailProductComponent}, //para pasar datos por url 
   {path:'nosotros', component:InformationCompanyComponent},
   {path:'usuarios', component:UserComponent, children:[
       {path:'agregar', component:AgregarUsuarioComponent},

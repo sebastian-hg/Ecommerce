@@ -1,10 +1,18 @@
-<div class="container">
+<!-- <div class="container">
     <div class="products" *ngFor="let articulo of articulos">
         <h4>Nombre:<a [routerLink]="['/productosDetalle',articulo.name , articulo.price]">{{articulo.name}}</a></h4>
         <p>Descripcion:{{articulo.description}} </p>
         <H5>Precio: {{articulo.price | currency}}</H5>
         
     </div>
+</div> -->
 
-
+<div class="container">
+    <div class="products" *ngFor="let articulo of articulos">
+        <h4>Nombre:<a [routerLink]="['/productosDetalle',articulo.name , articulo.price]">{{articulo.name}}</a></h4>
+        <h4>Nombre:<a (click)="passParameter(articulo)">{{articulo.name}}</a></h4>
+        <p>Descripcion:{{articulo.description}} </p>
+        <H5>Precio: {{articulo.price | currency}}</H5>
+        
+    </div>
 </div>

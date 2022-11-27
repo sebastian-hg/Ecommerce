@@ -14,6 +14,7 @@ import { InformationCompanyComponent } from './information-company/information-c
 import { AgregarUsuarioComponent } from './user/agregar-usuario/agregar-usuario.component';
 import { EditarUsuarioComponent } from './user/editar-usuario/editar-usuario.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DetailProductComponent } from './detail-product/detail-product.componen
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
     DetailProductComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
